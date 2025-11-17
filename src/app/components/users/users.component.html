@@ -1,0 +1,30 @@
+<div class="container">
+  <h2 class="title">Usuários</h2>
+
+  <div class="form-row">
+    <label>Nome</label>
+    <input class="input" [(ngModel)]="model.fullName" />
+  </div>
+
+  <div class="form-row">
+    <label>Email</label>
+    <input class="input" [(ngModel)]="model.email" />
+  </div>
+
+  <div style="display:flex; gap:8px; margin-bottom:16px;">
+    <button class="btn btn-primary" (click)="add()">Cadastrar</button>
+    <button class="btn btn-ghost" (click)="model = { fullName: '', email: '' }">Limpar</button>
+  </div>
+
+  <div *ngIf="users.length === 0" style="color:#ccc">Nenhum usuário cadastrado.</div>
+
+  <div *ngFor="let u of users" class="card" style="margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <div style="font-weight:600">{{u.fullName}}</div>
+      <div class="small">{{u.email}}</div>
+    </div>
+    <div>
+      <button class="btn btn-sm" (click)="remove(u.id)">Remover</button>
+    </div>
+  </div>
+</div>

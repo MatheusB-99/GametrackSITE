@@ -1,0 +1,43 @@
+/* Custom dropdown styles (copied from game-form to match exactly) */
+.custom-select {
+  position: relative;
+  width: 100%;
+  outline: none;
+}
+
+.custom-select .selected {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #123146;
+  background: transparent;
+  color: #fff;
+}
+
+.custom-select:focus .selected {
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+
+.custom-select .options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--card, #08162b);
+  border: 1px solid #123146;
+  border-radius: 8px;
+  max-height: 220px;
+  overflow: auto;
+  z-index: 9999;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+.custom-select .option {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.custom-select .option:hover,
+.custom-select .option.current {
+  background: rgba(37,99,235,0.12);
+}

@@ -1,0 +1,20 @@
+<div class="container">
+  <h2 class="title">Ranking de Jogos</h2>
+  <ng-container *ngIf="games.length > 0; else noGames">
+    <div *ngFor="let g of games" style="margin-bottom:12px" class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center">
+        <div>
+          <div style="font-weight:600">{{g.name}}</div>
+          <div class="small">{{g.category}}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="rating">{{gs.avgRating(g)}}</div>
+          <div class="small">Avaliações: {{g.ratings?.length || 0}}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noGames>
+    <div style="text-align:center; margin-top:32px; color:#ccc;">Nenhum jogo encontrado para ranking.</div>
+  </ng-template>
+</div>

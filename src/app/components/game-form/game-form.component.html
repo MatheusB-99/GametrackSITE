@@ -1,0 +1,92 @@
+<div class="container">
+  <h2 class="title">{{ editing ? 'Editar Jogo' : 'Cadastrar Jogo' }}</h2>
+
+  <div class="form-row">
+    <label>Nome</label>
+    <input class="input" [(ngModel)]="model.name" />
+  </div>
+
+  <div class="form-row">
+    <label>Descrição</label>
+    <textarea class="input" rows="4" [(ngModel)]="model.description"></textarea>
+  </div>
+
+  <div class="form-row">
+    <label>Data de início</label>
+    <input class="input" type="date" [(ngModel)]="model.startDate" />
+  </div>
+
+  <div class="form-row">
+    <label>Data de término (opcional)</label>
+    <input class="input" type="date" [(ngModel)]="model.endDate" />
+  </div>
+
+  <div class="form-row">
+    <label>Categoria</label>
+    <div class="custom-select input" tabindex="0" (click)="toggleCategory()" (keydown.enter)="toggleCategory()">
+      <div class="selected">{{ model.category || 'Outro' }}</div>
+      <div class="options" *ngIf="categoryOpen" (click)="$event.stopPropagation()">
+        <div class="option"
+             *ngFor="let c of categories"
+             (click)="selectCategory(c, $event)"
+             [class.current]="c === model.category">
+          {{ c }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label>Usuários vinculados</label>
+    <select class="input" multiple [(ngModel)]="model.userIds">
+      <option *ngFor="let u of users" [ngValue]="u.id">{{u.fullName}}</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label>Avaliação</label>
+    <div class="star-rating">
+      <span *ngFor="let star of [1,2,3,4,5]" 
+            class="star" 
+            [class.filled]="star <= rating"
+            (click)="setRating(star)">
+        ★
+      </span>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:8px;">
+    <button class="btn btn-primary" (click)="save()">{{ editing ? 'Atualizar' : 'Cadastrar' }}</button>
+    <button class="btn btn-ghost" (click)="clear()">Limpar</button>
+  </div>
+</div>
+
+<style>
+.star-rating {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.game-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+  max-width: 300px;
+}
+
+.game-card h3 {
+  margin-top: 0;
+}
+</style>
