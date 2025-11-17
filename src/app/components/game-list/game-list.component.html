@@ -1,0 +1,38 @@
+<div class="container">
+  <h2 class="title">Lista de Jogos</h2>
+
+  <div class="form-row" style="margin-bottom: 16px; display: flex; gap: 16px;">
+    <label>Filtrar por categoria:</label>
+    <select class="input" [(ngModel)]="selectedCategory" (change)="filter()">
+      <option value="">Todas</option>
+      <option *ngFor="let c of categories" [value]="c">{{c}}</option>
+    </select>
+    <label>Filtrar por usuário:</label>
+    <select class="input" [(ngModel)]="selectedUserId" (change)="filter()">
+      <option [ngValue]="null">Todos</option>
+      <option *ngFor="let u of users" [ngValue]="u.id">{{u.fullName}}</option>
+    </select>
+  </div>
+
+  <div class="card-list" style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
+    <div *ngFor="let g of games" class="card" style="width: 370px; border-radius: 12px; box-shadow: 0 2px 12px #0002; background: #192c6b; overflow: hidden; display: flex; flex-direction: column;">
+      <div style="background: #233b7b; color: #fff; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 1.3em;">
+        Imagem indisponível
+      </div>
+      <div style="padding: 18px 18px 12px 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; align-items: center; justify-content: flex-start;">
+          <span (click)="rate(g, 5)" style="color: gold; font-size: 1.5em; cursor: pointer;">★</span>
+        </div>
+        <div style="margin-top: 8px; font-weight: bold; color: #ffb300; font-size: 1.3em;">{{g.name}}</div>
+        <div style="color: #fff; opacity: 0.8; font-size: 1em;">{{g.category}}</div>
+        <div style="color: #fff; opacity: 0.8; font-size: 0.95em; margin-bottom: 8px;">
+          {{g.description || 'Sem descrição...'}}
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-ghost" (click)="edit(g.id)">Editar</button>
+          <button class="btn btn-danger" (click)="delete(g.id)">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
